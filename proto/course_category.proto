@@ -2,6 +2,11 @@ syntax = "proto3";
 package pb;
 option go_package = "internal/pb";
 
+// Sempre que fizer alterações deve rodar novamento o comando de ex abaixo
+// protoc --go_out=. --go-grpc_out=. proto/course_category.proto
+
+message blank{}
+
 message Category {
     string id = 1;
     string name = 2;
@@ -13,10 +18,16 @@ message CreateCategoryRequest {
     string description = 2;
 }
 
-message CategoryResponse {
-    Category category = 1;
+message CategoryList{
+    repeated Category categories = 1;
+}
+
+message CategoryGetRequest{
+    string id = 1;
 }
 
 service CategoryService {
-    rpc CreateCategory(CreateCategoryRequest) returns (CategoryResponse) {};
+    rpc CreateCategory(CreateCategoryRequest) returns (Category) {};
+    rpc ListCategoies(blank) returns (CategoryList) {};
+    rpc GetCategory(CategoryGetRequest) returns (Category) {};
 }
