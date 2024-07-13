@@ -28,6 +28,8 @@ message CategoryGetRequest{
 
 service CategoryService {
     rpc CreateCategory(CreateCategoryRequest) returns (Category) {};
+    rpc CreateCategoryStream(stream CreateCategoryRequest) returns (CategoryList) {};
+    rpc CreateCategoryStreamBidirectional(stream CreateCategoryRequest) returns (stream Category) {};
     rpc ListCategoies(blank) returns (CategoryList) {};
     rpc GetCategory(CategoryGetRequest) returns (Category) {};
 }
